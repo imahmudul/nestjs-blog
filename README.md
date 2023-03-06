@@ -1,73 +1,95 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Blog API with MongoDB, Elasticsearch, Redis and Docker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a simple blog API built with NestJS, MongoDB, Elasticsearch, Redis, and Docker. The API allows users to create, read, update, and delete articles, like/dislike articles, comment on articles, search articles, and more.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requirements
 
-## Description
+- Node.js (v14 or higher)
+- Docker
+- Docker Compose
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Getting Started
 
-## Installation
+1. Clone this repository:
+git clone https://github.com/<username>/nest-blog-api.git
 
-```bash
-$ npm install
-```
+2. Navigate to the project directory:
+cd nest-blog-api
 
-## Running the app
+3. Install dependencies:
+npm install
 
-```bash
-# development
-$ npm run start
+4. Copy `.env.example` to `.env` and update environment variables:
+cp .env.example .env
 
-# watch mode
-$ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+5. Start the Docker containers:
+docker-compose up
 
-## Test
+6. Open a new terminal window and run the database migration:
+npm run migration:run
 
-```bash
-# unit tests
-$ npm run test
+7. Open another terminal window and start the application:
+npm run start:dev
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
+The API is now running on `http://localhost:3000`.
 
-## Support
+## API Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### GET /articles
 
-## Stay in touch
+Get all articles.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### POST /articles
+
+Create a new article.
+
+### GET /articles/:id
+
+Get a single article by ID.
+
+### PUT /articles/:id
+
+Update an existing article by ID.
+
+### DELETE /articles/:id
+
+Delete an article by ID.
+
+### POST /articles/:id/like
+
+Like an article by ID.
+
+### POST /articles/:id/dislike
+
+Dislike an article by ID.
+
+### POST /articles/:id/comments
+
+Create a comment on an article by ID.
+
+### GET /users/:username/articles/liked
+
+Get all articles liked by a user by username.
+
+### GET /articles/search
+
+Search articles by tags or category.
+
+## Testing
+
+Run the tests:
+
+npm run test
+
+
+## Contributing
+
+Contributions are welcome. Please make sure to update tests as appropriate.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+
