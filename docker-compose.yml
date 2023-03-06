@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  nestjs_blog:
+    build: .
+    container_name: app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - redis
+      - elasticsearch
+    environment:
+      - MONGO_URI=mongodb://localhost:27017/blog
+      - REDIS_HOST=redis
+      - ELASTICSEARCH_HOST=elasticsearch:9200
+
+  mongo:
+    image: mongo:5.0.5
+    container_name: mongo
+    restart: always
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  redis:
+    image: redis:6.2.6
+    container_name: redis
+    restart: always
+    volumes:
+      - ./redis-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "http.host=0.0.0.0"
+      - "transport.host=127.0.0.1"
+      - "xpack.security.enabled=false"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
