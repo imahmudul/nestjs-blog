@@ -81,50 +81,5 @@ describe('ArticlesController', () => {
     expect(await controller.create(articleDto)).toEqual(result);
   });
 
-  // it('should user like an article', async () => {
-
-  //   const updateArticleDto: CreateArticleDto = {
-  //     title: 'New Article',
-  //     content: 'Article content',
-  //     tags: ['demo'],
-  //     category: 'demo',
-  //     likes: [],
-  //     dislikes: [],
-  //     comments: [],
-  //     createdAt: new Date,
-  //     updatedAt: new Date
-  //   };
-
-  //   const likeDto: LikeDto = {
-  //     userId: '1',
-  //   };
-
-  //   const result = {
-  //     id: expect.any(Number),
-  //     title: 'New Article',
-  //     content: 'Article content',
-  //     tags: ['demo'],
-  //     category: 'demo',
-  //     likes: ['1'],
-  //     dislikes: [],
-  //     comments: [],
-  //     createdAt: new Date,
-  //     updatedAt: new Date
-  //   };
-
-  //   // const data = await controller.likeArticle(
-  //   //   '1',
-  //   //   likeDto
-  //   // );
-
-  //   // console.log({data});
-
-  //   expect(await controller.likeArticle(
-  //     '1',
-  //     likeDto
-  //   )).toEqual({ '0': '1', id: '1' });
-
-  // })
-
   // Add more test cases for the other controller methods
 });
