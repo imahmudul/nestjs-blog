@@ -1,4 +1,4 @@
-import { SearchBody } from './searchBody.interface';
+import { SearchBody } from '../interfaces/searchBody.interface';
 
 export interface SearchResult {
   hits: {

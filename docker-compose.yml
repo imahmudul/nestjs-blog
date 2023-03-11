@@ -1,9 +1,9 @@
 version: "3.9"
 
 services:
-  nestjs_blog:
+  app:
     build: .
-    container_name: app
+    container_name: blog-api
     restart: always
     ports:
       - "3000:3000"
@@ -12,16 +12,17 @@ services:
       - redis
       - elasticsearch
     environment:
-      - MONGO_URI=mongodb://localhost:27017/blog
-      - REDIS_HOST=redis
-      - ELASTICSEARCH_HOST=elasticsearch:9200
-
+      - MONGO_URI=mongodb://mongo:27017/blog
+      - REDIS_HOST=redis://redis:6379
+      - ELASTICSEARCH_NODE=http://elasticsearch:9200
+    networks:
+      - app-network
   mongo:
-    image: mongo:5.0.5
+    image: mongo
     container_name: mongo
     restart: always
     volumes:
-      - ./mongo-data:/data/db
+      - ./data:/data/db
     ports:
       - "27017:27017"
     networks:
@@ -31,13 +32,27 @@ services:
     image: redis:6.2.6
     container_name: redis
     restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 10s
+      retries: 3
     volumes:
       - ./redis-data:/data
     ports:
       - "6379:6379"
     networks:
       - app-network
-
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - app-network
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
     container_name: elasticsearch

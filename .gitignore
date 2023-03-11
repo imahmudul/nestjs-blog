@@ -37,3 +37,10 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 tsconfig.build.json
+
+elasticsearch
+mongo-data
+redis-data
+data
+
+rabbitmq.env

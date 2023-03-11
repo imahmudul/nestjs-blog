@@ -5,8 +5,8 @@ export interface Article extends Document {
   readonly content: string;
   readonly category: string;
   readonly tags: string[];
-  readonly likes: string[];
-  readonly dislikes: string[];
+  readonly likes: any[];
+  readonly dislikes: any[];
   readonly comments: Comment[];
 }
 

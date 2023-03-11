@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ElasticsearchService } from '@nestjs/elasticsearch';
-import { Article } from './article.interface';
-import { SearchResult } from './searchResponse.interface';
-import { SearchBody } from './searchBody.interface';
+import { Article } from '../interfaces/article.interface';
+import { SearchResult } from '../interfaces/searchResponse.interface';
+import { SearchBody } from '../interfaces/searchBody.interface';
 
 @Injectable()
 export class SearchService {
@@ -25,7 +25,7 @@ export class SearchService {
     })
   }
 
-  async search(text: string) {
+  async searchByTagOrCategory(text: string) {
     const { body } = await this.elasticsearchService.search<SearchResult>({
       index: this.index,
       body: {
@@ -38,6 +38,7 @@ export class SearchService {
       }
     })
     const hits = body.hits.hits;
-    return hits.map((item) => item._source);
+    const result = hits.map((item) => item._source);
+    return result;
   }
 }

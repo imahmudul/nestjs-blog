@@ -12,17 +12,3 @@ export const ArticleSchema = new mongoose.Schema({
   dislikes: Array,
   comments: Array
 });
-
-// export interface Article extends mongoose.Document {
-//   id: string;
-//   title: string;
-//   content: string;
-//   category: String;
-//   author: string;
-//   createdAt: Date;
-//   updatedAt: Date;
-//   likes: any[],
-//   tags: string[],
-//   dislikes: any[],
-//   comments: any[]
-// }
