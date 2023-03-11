@@ -44,3 +44,5 @@ redis-data
 data
 
 rabbitmq.env
+# Local Netlify folder
+.netlify
